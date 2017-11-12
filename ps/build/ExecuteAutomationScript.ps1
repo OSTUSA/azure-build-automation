@@ -38,8 +38,8 @@ $doLoop = $true
 if ($job -ne $null){
     While ($doLoop) {
        Start-Sleep -s 5
-       $job = Get-AzureRmAutomationJob -ResourceGroupName "CI-PROD" `
-       –AutomationAccountName "ci-automation" -Id $job.JobId
+       $job = Get-AzureRmAutomationJob -ResourceGroupName $resourceGroup `
+       –AutomationAccountName $automationAccountName -Id $job.JobId
        $status = $job.Status
        $doLoop = (($status -ne "Completed") -and ($status -ne "Failed") -and ($status -ne "Suspended") -and ($status -ne "Stopped"))
        Write-Host -NoNewLine .
