@@ -39,7 +39,7 @@ if ($job -ne $null){
     While ($doLoop) {
        Start-Sleep -s 5
        $job = Get-AzureRmAutomationJob -ResourceGroupName $resourceGroup `
-       –AutomationAccountName $automationAccountName -Id $job.JobId
+       -AutomationAccountName $automationAccountName -Id $job.JobId
        $status = $job.Status
        $doLoop = (($status -ne "Completed") -and ($status -ne "Failed") -and ($status -ne "Suspended") -and ($status -ne "Stopped"))
        Write-Host -NoNewLine .
@@ -50,7 +50,7 @@ if ($job -ne $null){
 <# RETURN RUNBOOK STATUS #>
 if ($status -ne "Completed")
 {
-    throw "Failed to execute runbook successfully - - $status"
+    throw "Failed to execute runbook successfully - $status"
 }
 else
 {
