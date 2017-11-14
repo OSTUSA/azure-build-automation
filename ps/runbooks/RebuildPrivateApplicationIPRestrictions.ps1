@@ -43,13 +43,14 @@ param (
     {
         $privateResource = Get-AzureRmResource -ResourceGroupName $resourceGroupName -ResourceType Microsoft.Web/sites/config -ResourceName $privateApp -ApiVersion 2016-08-01
         $properties = $privateResource.Properties
-        $currentWhiteListedIPs = $properties.ipSecurityRestrictions
         $properties.ipSecurityRestrictions = @()
     
         if (($properties.ipSecurityRestrictions -eq $null -and $whitelistedIPs.Count -gt 0) -or $overwriteExistingRules)
         {
             $properties.ipSecurityRestrictions = @()
         }
+
+        $currentWhiteListedIPs = $properties.ipSecurityRestrictions
     
         foreach ($ip in $whitelistedIPs)
         {

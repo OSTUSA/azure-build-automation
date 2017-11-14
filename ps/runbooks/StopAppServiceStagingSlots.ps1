@@ -3,7 +3,7 @@ workflow Stop-AzureRmStagingSlots
     param (
     [Parameter(Mandatory=$true)][string]$resourceGroupName,
     [Parameter(Mandatory=$true)][string[]]$applicationNames,
-    [Parameter(Mandatory=$true)][string]$slotName = "staging"
+    [Parameter(Mandatory=$true)][string]$slotName
 	)
 
 	<# SPECIFY RUNBOOK CONNECTION NAME FOR YOUR IMPLEMENTATION #>
@@ -32,7 +32,7 @@ workflow Stop-AzureRmStagingSlots
         if ($slot -eq $null)
         {
             (InlineScript { Write-Host "Creating application slot..." })				
-            $slot = New-AzureRmWebAppSlot -ResourceGroupName $resourceGroupName -Name $applicationName -Slot $slotName
+            $slot = New-AzureRmWebAppSlot -ResourceGroupName $resourceGroupName -Name $applicationName -Slot $slotName -SourceWebApp $applicationName
             (InlineScript { Write-Host "Created application slot." })				
         }
 
