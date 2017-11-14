@@ -34,6 +34,6 @@ workflow DeleteAppServiceSlots
     (InlineScript { Write-Host "Deleting slots..." })
     foreach -parallel ($applicationName in $applicationWorkingList)
     {
-        Remove-AzureRmWebAppSlot -ResourceGroupName $resourceGroupName -Name $applicationName -Slot $slotName
+        Remove-AzureRmWebAppSlot -ResourceGroupName $resourceGroupName -Name $applicationName -Slot $slotName -Force
     }
 }
