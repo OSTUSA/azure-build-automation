@@ -1,4 +1,4 @@
-workflow Stop-AzureRmStagingSlots
+workflow StopAppServiceSlots
 {
     param (
     [Parameter(Mandatory=$true)][string]$resourceGroupName,
