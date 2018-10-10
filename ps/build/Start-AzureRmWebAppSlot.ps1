@@ -1,4 +1,5 @@
 param (
+    [Parameter(Mandatory=$true)][string]$subscriptionId,
 	[Parameter(Mandatory=$true)][string]$tenantId,
 	[Parameter(Mandatory=$true)][string]$applicationId,
     [Parameter(Mandatory=$true)][string]$applicationKey,
@@ -18,5 +19,7 @@ Write-Host "Adding azure service principal to powershell context..."
 $SecurePassword = $applicationKey | ConvertTo-SecureString -AsPlainText -Force
 $cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $applicationId, $SecurePassword
 Add-AzureRmAccount -Credential $cred -Tenant $tenantId -ServicePrincipal
+
+Set-AzureRmContext -SubscriptionId $subscriptionId
 
 Start-AzureRmWebAppSlot -ResourceGroupName $resourceGroup -Name $application -Slot $slot
